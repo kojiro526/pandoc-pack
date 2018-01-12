@@ -25,11 +25,12 @@ RUN set -x \
      --no-install-recommends 
 
 # Install plantuml
-RUN mkdir /tools
-RUN wget --trust-server-names https://sourceforge.net/projects/plantuml/files/plantuml.jar/download -P /tools
+RUN mkdir /root/bin
+RUN wget --trust-server-names https://sourceforge.net/projects/plantuml/files/plantuml.jar/download -P /root/bin
 
 # Install script
-ADD build.sh /tools
+RUN mkdir /tools
+ADD build.sh /tools/build.sh
 
 # Install pandoc
 RUN wget https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb -P /tmp/
