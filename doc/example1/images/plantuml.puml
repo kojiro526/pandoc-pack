@@ -1,0 +1,6 @@
+@startuml plantuml.png
+
+Foo -> Bar : メッセージ
+Foo <-- Bar
+
+@enduml
