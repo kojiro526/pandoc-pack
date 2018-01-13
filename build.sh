@@ -21,7 +21,11 @@ PUML_PATH=~/bin/plantuml.jar
 
 # Parsing options
 usage_exit() {
-        echo "Usage: $0 [-n] [-r reference_file_name] source_dir" 1>&2
+        echo "Usage: $0 [OPTIONS] directory" 1>&2
+        echo "-n          Specify this when the structure of your project is part/chapter."
+        echo "-o FILENAME Output file path."
+        echo "-r FILENAME Specify a docx templete(reference.docx) for pandoc"
+        echo "-h          Show this help."
         exit 1
 }
 
