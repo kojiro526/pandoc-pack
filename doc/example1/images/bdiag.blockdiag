@@ -1,0 +1,7 @@
+blockdiag {
+   // ノードにラベルを設定
+   A [label = "ブロック１"];
+   B [label = "ブロック２"];
+   // And set text-color
+   C [label = "ブロック３"];
+}

@@ -1,0 +1,10 @@
+// シーケンス図サンプル
+seqdiag {
+  ブラウザ  -> Webサーバ [label = "GET /index.html"];
+  ブラウザ <-- Webサーバ 
+  ブラウザ  -> Webサーバ [label = "POST /blog/comment"];
+               Webサーバ -> データベース [label = "INSERT comment"];
+               Webサーバ <-- データベース;
+  ブラウザ <-- Webサーバ;
+}
+

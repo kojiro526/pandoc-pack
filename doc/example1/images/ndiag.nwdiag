@@ -1,0 +1,18 @@
+// ネットワーク図サンプル
+nwdiag {
+  network dmz {
+      address = "210.x.x.x/24"
+
+      Webサーバ01 [address = "210.x.x.1"];
+      Webサーバ02 [address = "210.x.x.2"];
+  }
+  network internal {
+      address = "172.x.x.x/24";
+
+      Webサーバ01 [address = "172.x.x.1"];
+      Webサーバ02 [address = "172.x.x.2"];
+      DBサーバ01;
+      DBサーバ02;
+  }
+}
+

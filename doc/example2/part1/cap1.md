@@ -2,8 +2,5 @@
 
 aaaa
 
-
 ![](images/dot.dot.png)
-
-![](images/plantuml.png)
 

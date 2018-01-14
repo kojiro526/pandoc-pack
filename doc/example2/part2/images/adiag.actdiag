@@ -1,0 +1,13 @@
+// アクティビティ図サンプル
+actdiag {
+  write -> convert -> image
+
+  lane user {
+     label = "ユーザ"
+     write [label = "reSTで書く"];
+     image [label = "遷移図を取得"];
+  }
+  lane actdiag {
+     convert [label = "reSTを画像に変換"];
+  }
+}
