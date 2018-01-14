@@ -92,7 +92,7 @@ OPT_OUTPUT=`abspath $OPT_OUTPUT`
 if [ -f $OPT_OUTPUT ] & [ $IS_FORCE -eq 0 ]; then
   echo "$OPT_OUTPUT is already exists. Overwrite? [Y/n]"
   RES=`yesno`
-  if $RES = "no"; then
+  if [ "$RES" = "no" ]; then
     exit 1
   fi
 fi
