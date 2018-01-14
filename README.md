@@ -91,12 +91,17 @@ Pandocを利用してMarkdownからdocxファイルをビルドするにあた�
 ビルドスクリプトの使い方は以下の通りです。
 
 ```
-Usage: build.sh [OPTIONS] directory
+Usage: ./build.sh [OPTIONS] directory
+-f          Attempt to overwrite the output file without prompting for confirmation.
 -n          Specify this when the structure of your project is part/chapter.
 -o FILENAME Output file path.
 -r FILENAME Specify a docx templete(reference.docx) for pandoc
 -h          Show this help.
 ```
+
+__-f__
+
+`-o`で指定した出力ファイルがすでに存在する場合に、強制的に上書きをします。
 
 __-n__
 
@@ -105,6 +110,8 @@ __-n__
 __-o FILENAME__
 
 出力するファイル（docx形式）のパスを指定します。
+
+ファイルがすでに存在する場合、通常は上書きを確認するプロンプトが表示されます。
 
 __-r FILENAME__
 
@@ -119,7 +126,6 @@ Markdownファイルが配置されたディレクトリのパスを指定しま
 ```
 $ bash build.sh -n -o ./path_to_output.docx -r ./path_to_reference.docx ./path_to_source_dir
 ```
-
 
 ## Docker
 
@@ -142,5 +148,24 @@ $ docker build -t kojiro526/pandoc-pack .
 上記でビルドしたdockerイメージを使ってdocxを生成する方法は以下の通り。
 
 ```
-$ docker run --rm -v $(pwd):/work kojiro526/pandoc-pack bash -c "cd /work; bash /tools/build.sh -r ./template/reference.docx -o /work/output.docx /work"
+$ docker run --rm -i -v $(pwd):/work kojiro526/pandoc-pack build.sh -r /work/template/reference.docx -o /work/output.docx /work"
 ```
+
+- `--rm`オプションを付加して、処理を実行後にコンテナが自動的に削除されるようにします。
+- 出力ファイルの上書き確認などでプロンプトを表示するためには、`-i`オプションを付加する必要があります。
+    - ビルドスクリプトに`-f`オプションを付加する場合は、`-i`オプションは必要ありません。
+- カレントディレクトリ（`$(pwd)`）をコンテナ内の`/work`にマウントします。
+    - ビルドスクリプトに与えるパスはコンテナにマウントされた`/work`から始まる絶対パスで指定します。
+- ビルドスクリプトはコンテナ内の`/usr/local/bin`に実行権限付きで配置されるため、直接指定して実行可能です。
+- カレントディレクトリ配下の`./template/reference.docx`をテンプレートファイルに指定します。
+- カレントディレクトリ配下に`output.docx`という名前でファイルを出力します。
+- カレントディレクトリをソースディレクトリに指定します。
+
+出力ファイルの上書き確認などを行わないようにする場合は、以下のようにします。
+
+```
+$ docker run --rm -v $(pwd):/work kojiro526/pandoc-pack build.sh -f -r /work/template/reference.docx -o /work/output.docx /work"
+```
+
+
+
