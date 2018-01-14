@@ -16,6 +16,7 @@
 
 
 SOURCE_DIR=.
+IS_FORCE=0
 IS_NEST=0
 PUML_PATH=~/bin/plantuml.jar
 
@@ -30,9 +31,20 @@ abspath() {
   fi
 }
 
+# ユーザの入力を受け取る関数
+yesno() {
+  echo "TEST"
+  read ANSWER
+  case $ANSWER in
+    "" | "Y" | "y" | "yes" | "Yes" | "YES" ) echo "yes";;
+    * ) echo "no";;
+  esac
+}
+
 # Parsing options
 usage_exit() {
         echo "Usage: $0 [OPTIONS] directory" 1>&2
+        echo "-f          Attempt to overwrite the output file without prompting for confirmation."
         echo "-n          Specify this when the structure of your project is part/chapter."
         echo "-o FILENAME Output file path."
         echo "-r FILENAME Specify a docx templete(reference.docx) for pandoc"
@@ -40,9 +52,11 @@ usage_exit() {
         exit 1
 }
 
-while getopts no:r:h OPT
+while getopts fno:r:h OPT
 do
   case $OPT in
+    f)  IS_FORCE=1
+      ;;
     n)  IS_NEST=1
       ;;
     o)  OUTPUT_PATH=$OPTARG
@@ -73,6 +87,15 @@ if [ -n "$OUTPUT_PATH" ]; then
   OPT_OUTPUT=$OUTPUT_PATH
 fi
 OPT_OUTPUT=`abspath $OPT_OUTPUT`
+
+# 出力ファイルの存在チェック
+if [ -f $OPT_OUTPUT ] & [ $IS_FORCE -eq 0 ]; then
+  echo "$OPT_OUTPUT is already exists. Overwrite? [Y/n]"
+  RES=`yesno`
+  if $RES = "no"; then
+    exit 1
+  fi
+fi
 
 if [ -n "$1" ]; then
   SOURCE_DIR=$1
