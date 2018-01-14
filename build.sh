@@ -84,6 +84,11 @@ else
 fi
 SOURCE_DIR=`abspath $SOURCE_DIR`
 
+if [ ! -d $SOURCE_DIR ]; then
+  echo "$SOURCE_DIR is not exists."
+  exit 1
+fi
+
 ## オプションに対する処理
 
 OPT_REF=""
