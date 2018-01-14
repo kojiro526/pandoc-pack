@@ -148,7 +148,7 @@ $ docker build -t kojiro526/pandoc-pack .
 上記でビルドしたdockerイメージを使ってdocxを生成する方法は以下の通り。
 
 ```
-$ docker run --rm -i -v $(pwd):/work kojiro526/pandoc-pack build.sh -r /work/template/reference.docx -o /work/output.docx /work"
+$ docker run --rm -i -v $(pwd):/work kojiro526/pandoc-pack build.sh -r /work/template/reference.docx -o /work/output.docx /work
 ```
 
 - `--rm`オプションを付加して、処理を実行後にコンテナが自動的に削除されるようにします。
@@ -164,8 +164,6 @@ $ docker run --rm -i -v $(pwd):/work kojiro526/pandoc-pack build.sh -r /work/tem
 出力ファイルの上書き確認などを行わないようにする場合は、以下のようにします。
 
 ```
-$ docker run --rm -v $(pwd):/work kojiro526/pandoc-pack build.sh -f -r /work/template/reference.docx -o /work/output.docx /work"
+$ docker run --rm -v $(pwd):/work kojiro526/pandoc-pack build.sh -f -r /work/template/reference.docx -o /work/output.docx /work
 ```
-
-
 
