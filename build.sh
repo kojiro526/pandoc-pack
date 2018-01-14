@@ -73,6 +73,17 @@ shift $((OPTIND - 1))
 
 ##### Main #####
 
+## 引数に対する処理
+
+if [ -n "$1" ]; then
+  SOURCE_DIR=$1
+  # 末尾のスラッシュを削除して正規化
+  SOURCE_DIR=${SOURCE_DIR%/}
+else
+  usage_exit
+fi
+SOURCE_DIR=`abspath $SOURCE_DIR`
+
 ## オプションに対する処理
 
 OPT_REF=""
@@ -95,15 +106,6 @@ if [ -f $OPT_OUTPUT ] & [ $IS_FORCE -eq 0 ]; then
     exit 1
   fi
 fi
-
-if [ -n "$1" ]; then
-  SOURCE_DIR=$1
-  # 末尾のスラッシュを削除して正規化
-  SOURCE_DIR=${SOURCE_DIR%/}
-else
-  usage_exit
-fi
-SOURCE_DIR=`abspath $SOURCE_DIR`
 
 ## 変換処理
 
