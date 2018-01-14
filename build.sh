@@ -19,6 +19,17 @@ SOURCE_DIR=.
 IS_NEST=0
 PUML_PATH=~/bin/plantuml.jar
 
+# 相対パスを絶対パスに変換する関数
+abspath() {
+  if [ -z "$1" ]; then
+    echo ""
+  else
+    dir=$(cd $(dirname $1) && pwd)
+    abspath=${dir%/}/$(basename $1)
+    echo $abspath
+  fi
+}
+
 # Parsing options
 usage_exit() {
         echo "Usage: $0 [OPTIONS] directory" 1>&2
@@ -49,15 +60,19 @@ shift $((OPTIND - 1))
 
 ##### Main #####
 
+## オプションに対する処理
+
 OPT_REF=""
 if [ -n "$REF_FILE" ]; then
   OPT_REF="--reference-docx=$REF_FILE"
 fi
+OPT_REF=`abspath $OPT_REF`
 
 OPT_OUTPUT="./output.docx"
 if [ -n "$OUTPUT_PATH" ]; then
   OPT_OUTPUT=$OUTPUT_PATH
 fi
+OPT_OUTPUT=`abspath $OPT_OUTPUT`
 
 if [ -n "$1" ]; then
   SOURCE_DIR=$1
@@ -66,6 +81,10 @@ if [ -n "$1" ]; then
 else
   usage_exit
 fi
+SOURCE_DIR=`abspath $SOURCE_DIR`
+
+## 変換処理
+cd $SOURCE_DIR
 
 # Markdownファイルと画像の検索パスを設定
 # 部・章に分かれる構成の場合は再帰的に検索する。
