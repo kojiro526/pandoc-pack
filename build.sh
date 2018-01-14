@@ -61,6 +61,8 @@ fi
 
 if [ -n "$1" ]; then
   SOURCE_DIR=$1
+  # 末尾のスラッシュを削除して正規化
+  SOURCE_DIR=${SOURCE_DIR%/}
 else
   usage_exit
 fi
