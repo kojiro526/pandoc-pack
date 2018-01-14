@@ -93,9 +93,9 @@ fi
 
 OPT_REF=""
 if [ -n "$REF_FILE" ]; then
-  OPT_REF="--reference-docx=$REF_FILE"
+  OPT_REF=`abspath $REF_FILE`
+  OPT_REF="--reference-docx=$OPT_REF"
 fi
-OPT_REF=`abspath $OPT_REF`
 
 OPT_OUTPUT="./output.docx"
 if [ -n "$OUTPUT_PATH" ]; then
