@@ -35,13 +35,14 @@ RUN wget --trust-server-names https://sourceforge.net/projects/plantuml/files/pl
 # Install script
 RUN mkdir /tools
 ADD build.sh /tools/build.sh
+RUN chmod a+x /tools/build.sh
+RUN ln -s /tools/build.sh /usr/local/bin/build.sh
 
 # Install pandoc
 RUN wget https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb -P /tmp/
 RUN dpkg -i /tmp/pandoc-1.19.2.1-1-amd64.deb
 
 # Install blockdiag
-RUN wget --trust-server-names 'https://downloads.sourceforge.net/project/plantuml/plantuml.jar?r=http%3A%2F%2Fplantuml.com%2Fdownload&ts=1509197096&use_mirror=jaist' -P /usr/local/bin/
 RUN easy_install blockdiag
 RUN easy_install seqdiag
 RUN easy_install actdiag
