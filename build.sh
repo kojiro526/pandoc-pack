@@ -98,7 +98,7 @@ fi
 
 # ビルド用に画像をコピー
 if [ $IS_NEST -eq 1 ]; then
-  if [ ! -f $SOURCE_DIR/images ]; then
+  if [ ! -e $SOURCE_DIR/images ]; then
     mkdir $SOURCE_DIR/images
   fi
   rm -rf $SOURCE_DIR/images/*
