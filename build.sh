@@ -78,7 +78,7 @@ IMAGE_SEARCH_PATH=$MD_SEARCH_PATH/images
 
 # 図を生成
 if type dot > /dev/null 2>&1; then
-  dot $SOURCE_DIR/**/images/*.dot -Tpng -O
+  dot $IMAGE_SEARCH_PATH/*.dot -Tpng -O
 fi
 if type java  > /dev/null 2>&1 & [ -f $PUML_PATH ]; then
   java -jar $PUML_PATH $IMAGE_SEARCH_PATH/*.puml
@@ -98,6 +98,9 @@ fi
 
 # ビルド用に画像をコピー
 if [ $IS_NEST -eq 1 ]; then
+  if [ ! -f $SOURCE_DIR/images ]; then
+    mkdir $SOURCE_DIR/images
+  fi
   rm -rf $SOURCE_DIR/images/*
   cp $IMAGE_SEARCH_PATH/*.png $SOURCE_DIR/images/
   cp $IMAGE_SEARCH_PATH/*.jpg $SOURCE_DIR/images/
