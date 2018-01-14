@@ -4,12 +4,16 @@ MAINTAINER kojiro <kojiro@ryusei-sya.com>
 
 ENV LANG ja_JP.UTF-8
 
+# language-pack はplantumlなどで日本語を扱うために必要
+# gitはcomposerがパッケージをダウンロードする際に必要
 RUN set -x \
     && apt-get update \
     && apt-get install -yqq software-properties-common  python-software-properties \
     && LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php \
     && apt-get update \
     && apt-get install -yqq \
+        language-pack-ja-base \
+        language-pack-ja \
         ca-certificates \
         unzip \
         wget \
