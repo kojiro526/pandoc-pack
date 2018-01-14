@@ -84,6 +84,8 @@ fi
 SOURCE_DIR=`abspath $SOURCE_DIR`
 
 ## 変換処理
+
+# pandocコマンドを実行するディレクトリをプロジェクト直下にするために移動
 cd $SOURCE_DIR
 
 # Markdownファイルと画像の検索パスを設定
@@ -115,7 +117,7 @@ if type nwdiag > /dev/null 2>&1; then
   nwdiag -Tpng --antialias --no-transparency $IMAGE_SEARCH_PATH/*.nwdiag
 fi
 
-# ビルド用に画像をコピー
+# ビルド用に画像を一時ディレクトリ内にコピー
 if [ $IS_NEST -eq 1 ]; then
   if [ ! -e $SOURCE_DIR/images ]; then
     mkdir $SOURCE_DIR/images
