@@ -33,7 +33,6 @@ abspath() {
 
 # ユーザの入力を受け取る関数
 yesno() {
-  echo "TEST"
   read ANSWER
   case $ANSWER in
     "" | "Y" | "y" | "yes" | "Yes" | "YES" ) echo "yes";;
