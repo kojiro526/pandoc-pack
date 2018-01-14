@@ -136,11 +136,11 @@ $ bash build.sh -n -o ./path_to_output.docx -r ./path_to_reference.docx ./path_t
 Dockerイメージのビルド方法は以下の通り。
 
 ```
-$ docker build -t kojiro526/pandoc-pac .
+$ docker build -t kojiro526/pandoc-pack .
 ```
 
 上記でビルドしたdockerイメージを使ってdocxを生成する方法は以下の通り。
 
 ```
-$ docker run --rm -v $(pwd):/work kojiro526/pandoc-pac bash -c "cd /work; bash /tools/build.sh -r ./template/reference.docx -o /work/output.docx /work"
+$ docker run --rm -v $(pwd):/work kojiro526/pandoc-pack bash -c "cd /work; bash /tools/build.sh -r ./template/reference.docx -o /work/output.docx /work"
 ```
