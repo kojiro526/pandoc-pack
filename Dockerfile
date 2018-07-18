@@ -1,6 +1,6 @@
 FROM ubuntu
 
-MAINTAINER kojiro <kojiro@ryusei-sya.com>
+LABEL  maintainer "kojiro <kojiro@ryusei-sha.com>"
 
 ENV LANG ja_JP.UTF-8
 
