@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:17.10
 
 LABEL  maintainer "kojiro <kojiro@ryusei-sha.com>"
 
@@ -8,7 +8,7 @@ ENV LANG ja_JP.UTF-8
 # gitはcomposerがパッケージをダウンロードする際に必要
 RUN set -x \
     && apt-get update \
-    && apt-get install -yqq software-properties-common  python-software-properties \
+    && apt-get install -yqq software-properties-common \
     && LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php \
     && apt-get update \
     && apt-get install -yqq \
