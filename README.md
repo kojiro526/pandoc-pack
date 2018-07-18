@@ -148,14 +148,14 @@ $ docker build -t kojiro526/pandoc-pack .
 上記でビルドしたdockerイメージを使ってdocxを生成する方法は以下の通り。
 
 ```
-$ docker run --rm -i -v $(pwd):/work kojiro526/pandoc-pack build.sh -r /work/template/reference.docx -o /work/output.docx /work
+$ docker run --rm -i -v $(pwd):/work kojiro526/pandoc-pack build.sh -r ./template/reference.docx -o ./output.docx .
 ```
 
 - `--rm`オプションを付加して、処理を実行後にコンテナが自動的に削除されるようにします。
 - 出力ファイルの上書き確認などでプロンプトを表示するためには、`-i`オプションを付加する必要があります。
     - ビルドスクリプトに`-f`オプションを付加する場合は、`-i`オプションは必要ありません。
 - カレントディレクトリ（`$(pwd)`）をコンテナ内の`/work`にマウントします。
-    - ビルドスクリプトに与えるパスはコンテナにマウントされた`/work`から始まる絶対パスで指定します。
+    - Dockerfile内でWORKDIRとしてコンテナ内の`/work`が指定されているため、カレントディレクトリを`/work`にマウントすることを推奨します。
 - ビルドスクリプトはコンテナ内の`/usr/local/bin`に実行権限付きで配置されるため、直接指定して実行可能です。
 - カレントディレクトリ配下の`./template/reference.docx`をテンプレートファイルに指定します。
 - カレントディレクトリ配下に`output.docx`という名前でファイルを出力します。
@@ -164,6 +164,6 @@ $ docker run --rm -i -v $(pwd):/work kojiro526/pandoc-pack build.sh -r /work/tem
 出力ファイルの上書き確認などを行わないようにする場合は、以下のようにします。
 
 ```
-$ docker run --rm -v $(pwd):/work kojiro526/pandoc-pack build.sh -f -r /work/template/reference.docx -o /work/output.docx /work
+$ docker run --rm -v $(pwd):/work kojiro526/pandoc-pack build.sh -f -r ./template/reference.docx -o ./output.docx .
 ```
 
