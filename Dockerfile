@@ -30,7 +30,7 @@ RUN set -x \
 
 # Install plantuml
 RUN mkdir /root/bin && \
-    wget --trust-server-names https://sourceforge.net/projects/plantuml/files/plantuml.jar/download -P /root/bin
+    wget --trust-server-names -q https://sourceforge.net/projects/plantuml/files/plantuml.jar/download -P /root/bin
 
 # Install script
 RUN mkdir /tools
@@ -39,7 +39,7 @@ RUN chmod a+x /tools/build.sh
 RUN ln -s /tools/build.sh /usr/local/bin/build.sh
 
 # Install pandoc
-RUN wget https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb -P /tmp/ && \
+RUN wget -q https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb -P /tmp/ && \
     dpkg -i /tmp/pandoc-1.19.2.1-1-amd64.deb
 
 # Install blockdiag
