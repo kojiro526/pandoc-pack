@@ -59,3 +59,6 @@ ENV PATH $PATH:/root/.composer/vendor/bin
 # Install php-docxtable
 RUN composer.phar global require kojiro526/php-docxtable
 
+WORKDIR /work
+
+CMD [ "bash" ]
