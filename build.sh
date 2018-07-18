@@ -104,7 +104,7 @@ fi
 OPT_OUTPUT=`abspath $OPT_OUTPUT`
 
 # 出力ファイルの存在チェック
-if [ -f $OPT_OUTPUT ] & [ $IS_FORCE -eq 0 ]; then
+if [ -f $OPT_OUTPUT ] && [ $IS_FORCE -eq 0 ]; then
   echo "$OPT_OUTPUT is already exists. Overwrite? [Y/n]"
   RES=`yesno`
   if [ "$RES" = "no" ]; then
