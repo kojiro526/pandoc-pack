@@ -131,22 +131,33 @@ fi
 IMAGE_SEARCH_PATH=$MD_SEARCH_PATH/images
 
 # 図を生成
-if type dot > /dev/null 2>&1; then
+$( ls $IMAGE_SEARCH_PATH/*.dot > /dev/null 2>&1 )
+if [ $? -eq 0 ] && type dot > /dev/null 2>&1; then
   dot $IMAGE_SEARCH_PATH/*.dot -Tpng -O
 fi
-if type java  > /dev/null 2>&1 & [ -f $PUML_PATH ]; then
+
+$( ls $IMAGE_SEARCH_PATH/*.puml > /dev/null 2>&1 )
+if [ $? -eq 0 ] && type java  > /dev/null 2>&1 && [ -f $PUML_PATH ]; then
   java -jar $PUML_PATH $IMAGE_SEARCH_PATH/*.puml
 fi
-if type blockdiag > /dev/null 2>&1; then
+
+$( ls $IMAGE_SEARCH_PATH/*.blockdiag > /dev/null 2>&1 )
+if [ $? -eq 0 ] && type blockdiag > /dev/null 2>&1; then
   blockdiag -Tpng --antialias --no-transparency $IMAGE_SEARCH_PATH/*.blockdiag
 fi
-if type seqdiag > /dev/null 2>&1; then
+
+$( ls $IMAGE_SEARCH_PATH/*.seqdiag > /dev/null 2>&1 )
+if [ $? -eq 0 ] && type seqdiag > /dev/null 2>&1; then
   seqdiag -Tpng --antialias --no-transparency $IMAGE_SEARCH_PATH/*.seqdiag
 fi
-if type actdiag > /dev/null 2>&1; then
+
+$( ls $IMAGE_SEARCH_PATH/*.actdiag > /dev/null 2>&1 )
+if [ $? -eq 0 ] && type actdiag > /dev/null 2>&1; then
   actdiag -Tpng --antialias --no-transparency $IMAGE_SEARCH_PATH/*.actdiag
 fi
-if type nwdiag > /dev/null 2>&1; then
+
+$( ls $IMAGE_SEARCH_PATH/*.nwdiag > /dev/null 2>&1 )
+if [ $? -eq 0 ] && type nwdiag > /dev/null 2>&1; then
   nwdiag -Tpng --antialias --no-transparency $IMAGE_SEARCH_PATH/*.nwdiag
 fi
 
