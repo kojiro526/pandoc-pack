@@ -94,6 +94,7 @@ Pandocを利用してMarkdownからdocxファイルをビルドするにあた�
 Usage: ./build.sh [OPTIONS] directory
 -f          Attempt to overwrite the output file without prompting for confirmation.
 -n          Specify this when the structure of your project is part/chapter.
+-i          Specify this if you want to build images only.
 -o FILENAME Output file path.
 -r FILENAME Specify a docx templete(reference.docx) for pandoc
 -h          Show this help.
@@ -106,6 +107,10 @@ __-f__
 __-n__
 
 ドキュメントのディレクトリ構成が、前述の部・章構成の場合に指定します。指定が無ければ章構成を前提とします。
+
+__-i__
+
+画像のみを生成する場合に指定します。`-o`オプションは無視されます。
 
 __-o FILENAME__
 

@@ -18,6 +18,7 @@
 SOURCE_DIR=.
 IS_FORCE=0
 IS_NEST=0
+BUILD_IMAGE_ONLY=0
 PUML_PATH=~/bin/plantuml.jar
 
 # 相対パスを絶対パスに変換する関数
@@ -45,18 +46,21 @@ usage_exit() {
         echo "Usage: $0 [OPTIONS] directory" 1>&2
         echo "-f          Attempt to overwrite the output file without prompting for confirmation."
         echo "-n          Specify this when the structure of your project is part/chapter."
+        echo "-i          Specify this if you want to build images only."
         echo "-o FILENAME Output file path."
         echo "-r FILENAME Specify a docx templete(reference.docx) for pandoc"
         echo "-h          Show this help."
         exit 1
 }
 
-while getopts fno:r:h OPT
+while getopts fnio:r:h OPT
 do
   case $OPT in
     f)  IS_FORCE=1
       ;;
     n)  IS_NEST=1
+      ;;
+    i)  BUILD_IMAGE_ONLY=1
       ;;
     o)  OUTPUT_PATH=$OPTARG
       ;;
@@ -104,7 +108,7 @@ fi
 OPT_OUTPUT=`abspath $OPT_OUTPUT`
 
 # 出力ファイルの存在チェック
-if [ -f $OPT_OUTPUT ] && [ $IS_FORCE -eq 0 ]; then
+if [ $BUILD_IMAGE_ONLY -eq 0 ] && [ -f $OPT_OUTPUT ] && [ $IS_FORCE -eq 0 ]; then
   echo "$OPT_OUTPUT is already exists. Overwrite? [Y/n]"
   RES=`yesno`
   if [ "$RES" = "no" ]; then
@@ -144,6 +148,10 @@ if type actdiag > /dev/null 2>&1; then
 fi
 if type nwdiag > /dev/null 2>&1; then
   nwdiag -Tpng --antialias --no-transparency $IMAGE_SEARCH_PATH/*.nwdiag
+fi
+
+if [ $BUILD_IMAGE_ONLY -eq 1 ]; then
+  exit
 fi
 
 # ビルド用に画像を一時ディレクトリ内にコピー
