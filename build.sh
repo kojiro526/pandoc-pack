@@ -107,6 +107,12 @@ if [ -n "$OUTPUT_PATH" ]; then
 fi
 OPT_OUTPUT=`abspath $OPT_OUTPUT`
 
+# 出力ファイル名から拡張子を取得
+OUTPUT_FORMAT=$(echo $OPT_OUTPUT | sed 's/^.*\.\([^\.]*\)$/\1/')
+if [ "$OUTPUT_FORMAT" = $OPT_OUTPUT ]; then
+  OUTPUT_FORMAT=""
+fi
+
 # 出力ファイルの存在チェック
 if [ $BUILD_IMAGE_ONLY -eq 0 ] && [ -f $OPT_OUTPUT ] && [ $IS_FORCE -eq 0 ]; then
   echo "$OPT_OUTPUT is already exists. Overwrite? [Y/n]"
@@ -177,5 +183,7 @@ fi
 
 # docxファイルをビルド
 pandoc $MD_SEARCH_PATH/*.md $OPT_REF --toc --toc-depth=3 -o "$OPT_OUTPUT"
-docxtable-php update -f $OPT_OUTPUT -s MyTable
+if [ "$OUTPUT_FORMAT" = "docx" ]; then
+  docxtable-php update -f $OPT_OUTPUT -s MyTable
+fi
 
