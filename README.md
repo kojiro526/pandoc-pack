@@ -97,6 +97,7 @@ Usage: ./build.sh [OPTIONS] directory
 -i          Specify this if you want to build images only.
 -o FILENAME Output file path.
 -r FILENAME Specify a docx templete(reference.docx) for pandoc
+-p OPTIONS  Specify another pandoc options.
 -h          Show this help.
 ```
 
@@ -121,6 +122,12 @@ __-o FILENAME__
 __-r FILENAME__
 
 Pandocで利用するテンプレートファイル（reference.docx）を指定します。
+
+__-p OPTIONS__
+
+Pandocのその他のオプションを自由に指定できます。
+
+`-p "--toc --toc-depth=3"`のように指定すれば、`--toc --toc-depth=3`がそのままPandocにオプションとして渡されます。
 
 __directory__
 

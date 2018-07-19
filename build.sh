@@ -49,11 +49,12 @@ usage_exit() {
         echo "-i          Specify this if you want to build images only."
         echo "-o FILENAME Output file path."
         echo "-r FILENAME Specify a docx templete(reference.docx) for pandoc"
+        echo "-p OPTIONS  Specify another pandoc options."
         echo "-h          Show this help."
         exit 1
 }
 
-while getopts fnio:r:h OPT
+while getopts fnio:r:p:h OPT
 do
   case $OPT in
     f)  IS_FORCE=1
@@ -65,6 +66,8 @@ do
     o)  OUTPUT_PATH=$OPTARG
       ;;
     r)  REF_FILE=$OPTARG
+      ;;
+    p)  PANDOC_OPTIONS=$OPTARG
       ;;
     h)  usage_exit
       ;;
@@ -182,7 +185,7 @@ if [ $IS_NEST -eq 1 ]; then
 fi
 
 # docxファイルをビルド
-pandoc $MD_SEARCH_PATH/*.md $OPT_REF --toc --toc-depth=3 -o "$OPT_OUTPUT"
+pandoc $MD_SEARCH_PATH/*.md $OPT_REF -o "$OPT_OUTPUT" $PANDOC_OPTIONS
 if [ "$OUTPUT_FORMAT" = "docx" ]; then
   docxtable-php update -f $OPT_OUTPUT -s MyTable
 fi
