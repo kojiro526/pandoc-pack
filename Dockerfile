@@ -39,8 +39,8 @@ RUN chmod a+x /tools/build.sh
 RUN ln -s /tools/build.sh /usr/local/bin/build.sh
 
 # Install pandoc
-RUN wget -q https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb -P /tmp/ && \
-    dpkg -i /tmp/pandoc-1.19.2.1-1-amd64.deb
+RUN wget -q https://github.com/jgm/pandoc/releases/download/2.2.2.1/pandoc-2.2.2.1-1-amd64.deb -P /tmp/ && \
+    dpkg -i /tmp/pandoc-2.2.2.1-1-amd64.deb
 
 # Install blockdiag
 RUN easy_install blockdiag && \
