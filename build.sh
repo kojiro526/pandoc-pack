@@ -101,7 +101,7 @@ fi
 OPT_REF=""
 if [ -n "$REF_FILE" ]; then
   OPT_REF=`abspath $REF_FILE`
-  OPT_REF="--reference-docx=$OPT_REF"
+  OPT_REF="--reference-doc=$OPT_REF"
 fi
 
 OPT_OUTPUT="./output.docx"
@@ -182,11 +182,5 @@ if [ $IS_NEST -eq 1 ]; then
   rm -rf $SOURCE_DIR/images/*
   cp $IMAGE_SEARCH_PATH/*.png $SOURCE_DIR/images/
   cp $IMAGE_SEARCH_PATH/*.jpg $SOURCE_DIR/images/
-fi
-
-# docxファイルをビルド
-pandoc $MD_SEARCH_PATH/*.md $OPT_REF -o "$OPT_OUTPUT" $PANDOC_OPTIONS
-if [ "$OUTPUT_FORMAT" = "docx" ]; then
-  docxtable-php update -f $OPT_OUTPUT -s MyTable
 fi
 
