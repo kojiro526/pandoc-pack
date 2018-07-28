@@ -184,3 +184,5 @@ if [ $IS_NEST -eq 1 ]; then
   cp $IMAGE_SEARCH_PATH/*.jpg $SOURCE_DIR/images/
 fi
 
+# docxファイルをビルド
+pandoc $MD_SEARCH_PATH/*.md $OPT_REF -o "$OPT_OUTPUT" $PANDOC_OPTIONS
