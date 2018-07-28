@@ -1,0 +1,21 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: docker:17.07.0-ce-git
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run:
+          command: docker build -t kojiro526/pandoc-pack .
+      - run:
+          command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+      - run:
+          command: docker push kojiro526/pandoc-pack
