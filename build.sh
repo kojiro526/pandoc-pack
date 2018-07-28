@@ -180,8 +180,15 @@ if [ $IS_NEST -eq 1 ]; then
     mkdir $SOURCE_DIR/images
   fi
   rm -rf $SOURCE_DIR/images/*
-  cp $IMAGE_SEARCH_PATH/*.png $SOURCE_DIR/images/
-  cp $IMAGE_SEARCH_PATH/*.jpg $SOURCE_DIR/images/
+
+  $( ls $IMAGE_SEARCH_PATH/*.png > /dev/null 2>&1 )
+  if [ $? -eq 0 ]; then
+    cp $IMAGE_SEARCH_PATH/*.png $SOURCE_DIR/images/
+  fi
+  $( ls $IMAGE_SEARCH_PATH/*.jpg > /dev/null 2>&1 )
+  if [ $? -eq 0 ]; then
+    cp $IMAGE_SEARCH_PATH/*.jpg $SOURCE_DIR/images/
+  fi
 fi
 
 # docxファイルをビルド
