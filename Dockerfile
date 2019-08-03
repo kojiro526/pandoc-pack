@@ -18,8 +18,6 @@ RUN set -x \
         ca-certificates \
         unzip \
         wget \
-        php7.1 php7.1-zip php7.1-xml \
-        git \
         libgmp10 \
         default-jre \
         graphviz \
@@ -49,16 +47,6 @@ RUN pip3 install pillow && \
     pip3 install seqdiag && \
     pip3 install actdiag && \
     pip3 install nwdiag
-
-# install composer↲
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php composer-setup.php --install-dir=/usr/bin && \
-    php -r "unlink('composer-setup.php');"
-
-ENV PATH $PATH:/root/.composer/vendor/bin
-
-# Install php-docxtable
-RUN composer.phar global require kojiro526/php-docxtable
 
 WORKDIR /work
 
