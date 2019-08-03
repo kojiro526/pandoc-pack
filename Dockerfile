@@ -1,8 +1,9 @@
-FROM ubuntu:17.10
+FROM ubuntu:bionic
 
 LABEL  maintainer "kojiro <kojiro@ryusei-sha.com>"
 
 ENV LANG ja_JP.UTF-8
+ARG DEBIAN_FRONTEND=noninteractive
 
 # language-pack はplantumlなどで日本語を扱うために必要
 # gitはcomposerがパッケージをダウンロードする際に必要
@@ -22,9 +23,9 @@ RUN set -x \
         libgmp10 \
         default-jre \
         graphviz \
-        python2.7 \ 
-        python-imaging \ 
-        python-setuptools \
+        python3 \
+        python3-pip \
+        python3-setuptools \
         fonts-ipafont-gothic fonts-ipafont-mincho\
      --no-install-recommends 
 
@@ -43,10 +44,11 @@ RUN wget -q https://github.com/jgm/pandoc/releases/download/2.6/pandoc-2.6-1-amd
     dpkg -i /tmp/pandoc-2.6-1-amd64.deb
 
 # Install blockdiag
-RUN easy_install blockdiag && \
-    easy_install seqdiag && \
-    easy_install actdiag && \
-    easy_install nwdiag
+RUN pip3 install pillow && \
+    pip3 install blockdiag && \
+    pip3 install seqdiag && \
+    pip3 install actdiag && \
+    pip3 install nwdiag
 
 # install composer↲
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
