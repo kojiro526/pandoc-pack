@@ -38,8 +38,8 @@ RUN chmod a+x /tools/build.sh
 RUN ln -s /tools/build.sh /usr/local/bin/build.sh
 
 # Install pandoc
-RUN wget -q https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb -P /tmp/ && \
-    dpkg -i /tmp/pandoc-2.7.3-1-amd64.deb
+RUN wget -q https://github.com/jgm/pandoc/releases/download/2.9.1/pandoc-2.9.1-1-amd64.deb -P /tmp/ && \
+    dpkg -i /tmp/pandoc-2.9.1-1-amd64.deb
 
 # Install blockdiag
 RUN pip3 install pillow && \
