@@ -26,3 +26,13 @@ jobs:
       - run:
           name: Push image to registory        
           command: docker push kojiro526/pandoc-pack
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
